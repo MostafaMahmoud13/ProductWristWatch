@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MMS — ساعات، محافظ، برفانات</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card img {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        footer a {
+            cursor: pointer;
+        }
+
+        /* خلي الحركة خطية في السطرين عشان تبقى ماركيه مستمرة */
+        .mySwiper .swiper-wrapper,
+        .mySwiper2 .swiper-wrapper {
+            transition-timing-function: linear !important;
+        }
+
+        :root {
+            --baby-blue: #b3e5fc;
+            --baby-blue-deep: #81d4fa;
+            --ink: #0d47a1;
+            --ink-2: #01579b;
+            --card-radius: 18px;
+        }
+
+        /* ====== NAVBAR ====== */
+        .navbar {
+            background: transparent !important;
+            /* شفاف فوق الهيرو */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 20;
+            box-shadow: none !important;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+        }
+
+        .navbar .nav-link {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff !important;
+            transition: opacity .25s ease;
+            letter-spacing: .3px;
+        }
+
+        .navbar .nav-link:hover {
+            opacity: .85;
+        }
+
+        .navbar-brand img {
+            height: 90px;
+            /* أصغر عشان ما يغطيش */
+            mix-blend-mode: multiply;
+            /* لو عليه خلفية بيضا تندمج */
+        }
+
+        /* زرار التوجل أبيض */
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, .6);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1) grayscale(1);
+        }
+
+        /* ====== HERO ====== */
+        header.hero {
+            position: relative;
+            min-height: 60vh;
+            /* أصغر من 100vh عشان المحتوى يبان */
+            display: flex;
+            align-items: center;
+        }
+
+        /* Overlay يحافظ على تباين النص */
+        header.hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .15) 40%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            color: #fff;
+            padding-top: 90px;
+            /* يبعد عن اللوجو */
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(179, 229, 252, .9);
+            color: #0d47a1;
+            padding: .35rem .7rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .9rem;
+        }
+
+        .hero h1 {
+            font-weight: 900;
+            line-height: 1.2;
+            margin: .6rem 0 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+        }
+
+        .hero .cta {
+            background: #fff;
+            color: #0d47a1;
+            border: none;
+            padding: .75rem 1.25rem;
+            border-radius: 999px;
+            font-weight: 800;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .hero .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
+        }
+
+        .logo-main {
+            height: 250px;
+            /* تحكم في الطول */
+            width: auto;
+            /* يحافظ على نسبة الطول للعرض */
+            /* خيارات إضافية لو تحب */
+            margin-top: 5px;
+            /* مسافة من فوق */
+        }
+
+        .logo-main {
+            height: 220px !important;
+            /* !important يجبر المتصفح يستخدمها */
+            width: auto;
+
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* ====== HERO ====== */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* يغطي الشاشة بدون تكبير زائد */
+            z-index: 1;
+        }
+
+
+
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            /* خلي Overlay أغمق شوي عشان الكلام يبان */
+            z-index: 1;
+        }
+
+        /* ====== NAVBAR ====== */
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+            background: transparent !important;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .navbar .nav-link {
+            color: #fff !important;
+            /* نص أبيض */
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .logo-main {
+            height: 120px;
+            width: auto;
+        }
+
+        /* ====== HERO CONTENT ====== */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff !important;
+            /* نص أبيض */
+            padding-top: 100px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(179, 229, 252, .8);
+            color: #0d47a1;
+            padding: .35rem .7rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-weight: 900;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero .cta {
+            background: #fff;
+            color: #0d47a1;
+            border: none;
+            padding: .75rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .hero .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero">
+        <!-- فيديو الخلفية -->
+        <video autoplay muted loop playsinline preload="auto" class="hero-video">
+            <source src="3.mp4" type="video/mp4">
+        </video>
+
+
+        <!-- Overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- النافبار -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container d-flex justify-content-between align-items-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#watches">ساعات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#wallets">محافظ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#perfumes">برفانات</a></li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <!-- محتوى الهيرو -->
+        <div class="hero-content">
+            <span class="hero-badge">عروض اليوم 🔥</span>
+            <h1>اختياراتك من الساعات والمحافظ والبرفانات</h1>
+            <p>شحن سريع • استبدال مضمون • أسعار منافسة</p>
+            <a href="#watches" class="btn cta">تسوق الآن</a>
+        </div>
+    </header>
+
+    <!-- قسم الساعات -->
+    <section id="watches" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold mb-4 text-center">⌚ ساعات تريند</h2>
+
+            <!-- السطر الأول -->
+            <div class="swiper mySwiper mb-4">
+                <div class="swiper-wrapper">
+                    <!-- منتجات السطر الأول -->
+                    <!-- منتج 1 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://image2url.com/images/1755561644945-5549aca7-c4f6-4acc-8aca-5e36a225348a.jpg"
+                                class="card-img-top" alt="ساعة 1">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة CASIO </h5>
+                                <p class="text-muted mb-1"><del>650 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">450 EGP</p>
+                                <p class="small text-success">🟢 متوفر 8 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product1.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 2 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/kgZRqBSP/IMG-20250907-230808-535.jpg" class="card-img-top"
+                                alt="ساعة 2">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة RICHARD MILLE </h5>
+                                <p class="text-muted mb-1"><del>850 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">700 EGP</p>
+                                <p class="small text-success">🟢 متوفر 5 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product2.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 3 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/mhWRmWzq/IMG-20250907-230945-973.jpg" class="card-img-top"
+                                alt="ساعة 3">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة جلد RICHARD MILLE</h5>
+                                <p class="text-muted mb-1"><del>750 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">600 EGP</p>
+                                <p class="small text-success">🟢 متوفر 9 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product3.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 4 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/65Hf4rSk/IMG-20250908-000729-163.jpg" class="card-img-top"
+                                alt="ساعة 4">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة PATEK PHILPPE</h5>
+                                <p class="text-muted mb-1"><del>800 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">650 EGP</p>
+                                <p class="small text-success">🟢 متوفر 5 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product4.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 5 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/GppFLHqc/IMG-20250908-002151-501.jpg" class="card-img-top"
+                                alt="ساعة 5">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة TISSOT</h5>
+                                <p class="text-muted mb-1"><del>700 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">550 EGP</p>
+                                <p class="small text-success">🟢 متوفر 5 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product5.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 6 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/PrMjnmhc/IMG-20250908-031018-617.jpg" class="card-img-top"
+                                alt="ساعة 6">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعه جلد TISSOT</h5>
+                                <p class="text-muted mb-1"><del>600 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">450 EGP</p>
+                                <p class="small text-success">🟢 متوفر 3 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product6.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 7 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/bN2hVswD/IMG-20250908-030950-692.jpg" class="card-img-top"
+                                alt="ساعة 7">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعه ROLEX</h5>
+                                <p class="text-muted mb-1"><del>850 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">600 EGP</p>
+                                <p class="small text-success">🟢 متوفر 6 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product7.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 8 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/wM2RN18B/IMG-20250908-030547-489.jpg" class="card-img-top"
+                                alt="ساعة 8">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعه جلد ROLEX</h5>
+                                <p class="text-muted mb-1"><del>650 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">400 EGP</p>
+                                <p class="small text-success">🟢 متوفر 5 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product8.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 9 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/nzJvQsSy/IMG-20250908-030654-0962.jpg" class="card-img-top"
+                                alt="ساعة 9">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعه CARTIER</h5>
+                                <p class="text-muted mb-1"><del>650 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">500 EGP</p>
+                                <p class="small text-success">🟢 متوفر 4 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="product9.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- السطر الثاني (يمشي بالعكس) -->
+            <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                    <!-- منتجات السطر الثاني -->
+                    <!-- منتج 1 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/ZnGgVj6h/IMG-20250910-134951-397.jpg" class="card-img-top"
+                                alt="ساعة 1">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة SHEIN</h5>
+                                <p class="text-muted mb-1"><del>500 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">350 EGP</p>
+                                <p class="small text-success">🟢 متوفر 8 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS1.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- منتج 2 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/Bbzgg69L/IMG-20250910-135223-055.jpg" class="card-img-top"
+                                alt="ساعة 2">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعه BVLGARL , OMEGA</h5>
+                                <p class="text-muted mb-1"><del>650 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">450 EGP</p>
+                                <p class="small text-success">🟢 متوفر 7 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS2.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 3 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/CKG5w6cz/IMG-20250910-140811-738.jpg" class="card-img-top"
+                                alt="ساعة 3">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة ROLEX </h5>
+                                <p class="text-muted mb-1"><del>650 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">450 EGP</p>
+                                <p class="small text-success">🟢 متوفر 6 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS5.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 4 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/brdB9WMJ/IMG-20250910-135317-966.jpg" class="card-img-top"
+                                alt="ساعة 4">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة GUESS </h5>
+                                <p class="text-muted mb-1"><del>600 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">450 EGP</p>
+                                <p class="small text-success">🟢 متوفر 5 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS4.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- منتج 5 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/D0DzwVL3/IMG-20250910-135244-596.jpg" class="card-img-top"
+                                alt="ساعة 5">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة ROLEX</h5>
+                                <p class="text-muted mb-1"><del>550 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">400 EGP</p>
+                                <p class="small text-success">🟢 متوفر 2 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS3.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 6 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/L8sG9qvf/IMG-20250910-141025-741.jpg" class="card-img-top"
+                                alt="ساعة 6">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة TAIXUN</h5>
+                                <p class="text-muted mb-1"><del>600 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">450 EGP</p>
+                                <p class="small text-success">🟢 متوفر 6 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS6.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 7 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/SKcB3c98/IMG-20250910-140923-021.jpg" class="card-img-top"
+                                alt="ساعة 7">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة BREITLING</h5>
+                                <p class="text-muted mb-1"><del>650 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">400 EGP</p>
+                                <p class="small text-success">🟢 متوفر 6 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS7.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 8 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://i.postimg.cc/L8WPw1SH/IMG-20250916-025359-357.jpg" class="card-img-top"
+                                alt="ساعة 8">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة ROLEX </h5>
+                                <p class="text-muted mb-1"><del>700 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">500 EGP</p>
+                                <p class="small text-success">🟢 متوفر 6 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS8.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- منتج 9 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm">
+                            <img src="https://image2url.com/images/1755565733964-bf050d20-cb86-47fe-8459-7f86007d8826.jpg"
+                                class="card-img-top" alt="ساعة 9">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ساعة ROLEX </h5>
+                                <p class="text-muted mb-1"><del>750 EGP</del></p>
+                                <p class="fw-bold text-dark fs-5">600 EGP</p>
+                                <p class="small text-success">🟢 متوفر 6 ألوان</p>
+                                <p class="small text-primary">🚚 شحن مجاني</p>
+                                <a href="productS9.html" class="btn btn-dark btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- الفوتر -->
+    <footer class="bg-dark text-white pt-4 pb-2 mt-5">
+        <div class="container text-center small">
+            <p>&copy; 2025 MMS. جميع الحقوق محفوظة.</p>
+            <p>
+                <a class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                <a class="text-white me-2"><i class="fab fa-twitter"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- سكريبتات -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiperSettings = {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            loop: true,
+            loopedSlides: 8,
+            allowTouchMove: true,
+            autoplay: { delay: 0, disableOnInteraction: false },
+            speed: 4000,
+            breakpoints: {
+                0: { slidesPerView: 1 },
+                576: { slidesPerView: 2 },
+                992: { slidesPerView: 4 }
+            }
+        };
+
+        // الساعات: السطر الأول (شمال ➝ يمين)
+        var swiper1 = new Swiper(".mySwiper", swiperSettings);
+
+        // الساعات: السطر الثاني (يمين ➝ شمال)
+        var swiper2 = new Swiper(".mySwiper2", {
+            ...swiperSettings,
+            autoplay: { delay: 0, disableOnInteraction: false, reverseDirection: true }
+        });
+
+        // المحافظ: زي السطر الأول (شمال ➝ يمين)
+        var swiper3 = new Swiper(".mySwiperWallets", swiperSettings);
+
+        // البرفانات: زي السطر الثاني (يمين ➝ شمال)
+        var swiper4 = new Swiper(".mySwiperPerfumes", {
+            ...swiperSettings,
+            autoplay: { delay: 0, disableOnInteraction: false, reverseDirection: true }
+        });
+
+    </script>
+    <script>
+        const vid = document.querySelector('.hero-video');
+        vid.play().catch(() => {
+            console.log('الفيديو لم يبدأ تلقائياً، حاول التفاعل مع الصفحة.');
+        });
+    </script>
+
+</body>
+
+</html>

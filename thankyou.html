@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شكراً لطلبك</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f1c40f, #e67e22);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+
+    .thankyou-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 50px 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      animation: fadeIn 1s ease-in-out;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .thankyou-box .icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      color: #2ecc71;
+      animation: bounce 1.2s infinite;
+    }
+
+    .thankyou-box h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .thankyou-box p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: white;
+      color: #e67e22;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #ddd;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="thankyou-box">
+    <div class="icon">✅</div>
+    <h1>🎉 شكراً لطلبك!</h1>
+    <p>تم استلام طلبك بنجاح.<br> سنتواصل معك قريباً لتأكيد التفاصيل وإتمام عملية الشحن 🚚</p>
+    <div class="btn-group">
+      <a href="index.html" class="btn">🏠 العودة للصفحة الرئيسية</a>
+      <a href="products.html" class="btn">🛒 تصفح المنتجات</a>
+      <a href="https://www.facebook.com/mostafa.mms.2025" target="_blank" class="btn">📲 تابعنا على فيسبوك</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حزام تصحيح القوام - المنتج 2</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f2f2f2, #ffffff);
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .product-images {
+            flex: 1 1 450px;
+            text-align: center;
+        }
+
+        .main-img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .thumbnails {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .thumbnails img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s ease;
+        }
+
+        .thumbnails img:hover {
+            border-color: #f1c40f;
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            flex: 1 1 500px;
+        }
+
+        .product-details h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .review-static {
+            font-size: 16px;
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .desc {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-box button {
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            background: #f1c40f;
+            border: none;
+            cursor: pointer;
+        }
+
+        #quantity {
+            width: 60px;
+            text-align: center;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        .buy-btn {
+            background: #f1c40f;
+            color: #000;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background: #d4ac0d;
+        }
+
+        .guarantee {
+            margin-top: 40px;
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            color: #2e7d32;
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+        }
+
+        .color-option.active {
+            border: 2px solid #ff6600;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+        }
+
+        /* المودال */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 80px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .mb-3 label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .mb-3 input,
+        .mb-3 select,
+        .mb-3 textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        /* ... باقي تنسيقاتك ... */
+
+        /* تكبير حجم الخطوط في المودال */
+        .modal-content label,
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            font-size: 18px;
+        }
+
+        .modal-content h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* أنيميشن فتح المودال */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 80px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(-50px);
+            opacity: 0;
+            animation: slideUp 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+            to {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section class="product-container">
+        <div class="product-images">
+            <img id="main-image" src="https://i.postimg.cc/wM2RN18B/IMG-20250908-030547-489.jpg" alt="المنتج"
+                class="main-img" />
+        </div>
+
+        <div class="product-details">
+
+
+
+            <label>اختر المنتج:</label>
+            <div class="thumbnails">
+                <div class="color-options">
+                    <img src="https://i.postimg.cc/wM2RN18B/IMG-20250908-030547-489.jpg" class="color-option active"
+                        onclick="selectVariant(this, 'A')" />
+                    <img src="https://i.postimg.cc/FRZHWwPW/IMG-20250908-030547-398.jpg" class="color-option"
+                        onclick="selectVariant(this, 'B')" />
+                    <img src="https://i.postimg.cc/DzchnLqm/IMG-20250908-030547-784.jpg" class="color-option"
+                        onclick="selectVariant(this, 'C')" />
+                    <img src="https://i.postimg.cc/G34pJgFQ/IMG-20250908-030547-0829-57290657.jpg" class="color-option"
+                        onclick="selectVariant(this, 'D')" />
+                    <img src="https://i.postimg.cc/2ynR9W8z/IMG-20250908-030547-937.jpg" class="color-option"
+                        onclick="selectVariant(this, 'E')" />
+                  
+
+                </div>
+            </div>
+            <h1>⌚  ساعه رولكس جلد ROLEX</h1>
+            <div class="review-static">⭐ 4.9/5 (418 تقييم)</div>
+            <p class="price">400 EGP</p>
+            <ul>
+                <li>🔥 ساعة يونيسكس فخمة – تناسب كل الأذواق</li>
+                <li>💎 استيك جلد كوالتي عالي</li>
+                <li>🥇مختومة من الظهر </li>
+                <li>⌚ تصميم كلاسيكي أنيق – يليق بكل لبسك</li>
+                <li>🎁 تصميم يخطف العين – خلي كل ستايلك يبقى ملكي</li>
+            </ul>
+            <input type="hidden" id="variant" value="A" />
+
+            <label for="quantity">الكمية:</label>
+            <div class="quantity-box">
+                <button type="button" onclick="changeQty(-1)">-</button>
+                <input type="number" id="quantity" value="1" min="1" readonly />
+                <button type="button" onclick="changeQty(1)">+</button>
+            </div>
+
+            <button type="button" class="buy-btn" onclick="openModal()">اشتري الآن</button>
+
+            <div class="guarantee">
+                ✅ ضمان استرجاع خلال 30 يوم.<br>
+                🔒 دفع آمن ودعم فني.<br>
+                🚚 شحن سريع متاح في جميع انحاء مصر .
+            </div>
+        </div>
+    </section>
+
+    <!-- المودال -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>إتمام الطلب</h2>
+            <form id="orderForm">
+                <!-- الحقول المخفية -->
+                <input type="hidden" name="اسم المنتج" id="productName">
+                <input type="hidden" name="اللون" id="productColor">
+                <input type="hidden" name="الكمية" id="productQty">
+                <input type="hidden" name="السعر" id="productPrice">
+                <input type="hidden" name="رابط صورة المنتج" id="productImageURL">
+                <input type="hidden" name="_next" value="thankyou.html">
+                <div class="mb-3">
+                    <label>الاسم الكامل</label>
+                    <input type="text" name="الاسم الكامل" required>
+                </div>
+                <div class="mb-3">
+                    <label>رقم واتساب</label>
+                    <input type="tel" name="رقم واتساب" required>
+                </div>
+                <div class="mb-3">
+                    <label>المحافظة</label>
+                    <select name="المحافظة" required>
+                        <option value="" disabled selected>اختر المحافظة</option>
+                        <option>القاهرة</option>
+                        <option>الجيزة</option>
+                        <option>الإسكندرية</option>
+                        <option>الدقهلية</option>
+                        <option>البحر الأحمر</option>
+                        <option>البحيرة</option>
+                        <option>الفيوم</option>
+                        <option>الغربية</option>
+                        <option>الإسماعيلية</option>
+                        <option>المنوفية</option>
+                        <option>المنيا</option>
+                        <option>القليوبية</option>
+                        <option>الوادي الجديد</option>
+                        <option>السويس</option>
+                        <option>أسوان</option>
+                        <option>أسيوط</option>
+                        <option>بني سويف</option>
+                        <option>بورسعيد</option>
+                        <option>دمياط</option>
+                        <option>الشرقية</option>
+                        <option>جنوب سيناء</option>
+                        <option>كفر الشيخ</option>
+                        <option>مطروح</option>
+                        <option>الأقصر</option>
+                        <option>قنا</option>
+                        <option>شمال سيناء</option>
+                        <option>سوهاج</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>العنوان بالتفصيل</label>
+                    <textarea name="العنوان" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="buy-btn">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function changeQty(amount) {
+            const input = document.getElementById("quantity");
+            let current = parseInt(input.value);
+            current = Math.max(1, current + amount);
+            input.value = current;
+        }
+
+        function selectVariant(el, value) {
+            document.getElementById('main-image').src = el.src;
+            document.getElementById('variant').value = value;
+            document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+            el.classList.add('active');
+
+            // حفظ رابط الصورة المختارة
+            document.getElementById('productImageURL').value = el.src;
+        }
+
+        function openModal() {
+            document.getElementById("productName").value = "⌚ ساعه رولكس ROLEX";
+            document.getElementById("productColor").value = document.getElementById("variant").value;
+            document.getElementById("productQty").value = document.getElementById("quantity").value;
+            document.getElementById("productPrice").value = "450 EGP";
+
+            // حفظ رابط الصورة المعروضة حاليًا
+            document.getElementById("productImageURL").value = document.getElementById("main-image").src;
+
+            document.getElementById("orderModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("orderModal").style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("orderModal")) {
+                closeModal();
+            }
+        }
+    </script>
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("https://formspree.io/f/xyzpagla", {
+                // حط رابط الفورم بتاعك هنا
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "thankyou.html"; // صفحة الشكر
+                } else {
+                    alert("حصل خطأ أثناء إرسال الطلب، حاول مرة أخرى");
+                }
+            }).catch(error => {
+                console.error("Error:", error);
+                alert("حصل خطأ أثناء إرسال الطلب");
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
